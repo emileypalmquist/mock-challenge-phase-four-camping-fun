@@ -62,6 +62,8 @@ You can run your Flask server from the
 `server/` directory with:
 
 ```console
+$ export FLASK_APP=app.py
+$ export FLASK_RUN_PORT=5555
 $ python app.py
 ```
 
