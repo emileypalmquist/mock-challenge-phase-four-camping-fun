@@ -54,7 +54,7 @@ def make_signups():
 
     for i in range(20):
         signup = Signup(
-            time=fake.sentence(),
+            time=randint(0, 23),
             camper_id=rc(campers)[0],
             activity_id=rc(activities)[0]
         )
