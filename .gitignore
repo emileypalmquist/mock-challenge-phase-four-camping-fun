@@ -1,0 +1,4 @@
+.venv
+server/.pytest_cache
+# server/instance
+.DS_Store
