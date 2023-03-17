@@ -124,6 +124,17 @@ $ flask db upgrade
 $ python seed.py
 ```
 
+If you run into errors with the migrate or upgrade try:
+
+- deleting the migrations folder and the database
+- run the following command to restart the db setup
+
+```console
+$ flask db init
+```
+
+- try the migrate and upgrade commands again
+
 ### Routes
 
 Set up the following routes. Make sure to return JSON data in the format
