@@ -65,7 +65,7 @@ You can run your Flask server from the
 $ python app.py
 ```
 
-## If you would prefer to include Flask Restful otherwise skip to Models section
+## If you would prefer to include Flask Restful complete the following otherwise skip to Models section
 
 This application is using vanilla Flask. If you would like to use flask-restful you can. To setup Flask-restful complete the following steps:
 
