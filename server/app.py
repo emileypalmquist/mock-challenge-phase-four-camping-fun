@@ -21,8 +21,7 @@ api = Api(app)
 class Campers(Resource):
     def get(self):
         campers = Camper.query.all()
-        campers_dict_list = [camper.to_dict(
-            rules=('-activities',)) for camper in campers]
+        campers_dict_list = [camper.to_dict() for camper in campers]
         response = make_response(
             campers_dict_list,
             200
@@ -31,15 +30,21 @@ class Campers(Resource):
 
     def post(self):
         data = request.get_json()
-
-        camper = Camper(
-            name=data['name'],
-            age=data['age']
-        )
-
-        db.session.add(camper)
-        db.session.commit()
-
+        try:
+            camper = Camper(
+                name=data['name'],
+                age=data['age']
+            )
+            db.session.add(camper)
+            db.session.commit()
+        except Exception as e:
+            message = {
+                "errors": [e.__str__()]
+            }
+            return make_response(
+                message,
+                422
+            )
         response = make_response(
             camper.to_dict(),
             201
@@ -58,7 +63,7 @@ class CamperById(Resource):
                 "error": "Camper not found"
             }, 404)
         response = make_response(
-            camper.to_dict(),
+            camper.to_dict(rules=('activities',)),
             200
         )
         return response
@@ -82,10 +87,56 @@ api.add_resource(Activities, '/activities')
 class ActivitiesById(Resource):
 
     def delete(self, id):
-        pass
+        activity = Activity.query.filter_by(id=id).first()
+        if not activity:
+            return make_response({
+                "error": "Activity not found"
+            }, 404)
+        try:
+            db.session.delete(activity)
+            db.session.commit()
+        except Exception as e:
+            return make_response(
+                {
+                    "errors": [e.__str__()]
+                },
+                422
+            )
+        return make_response(
+            "",
+            200
+        )
 
 
-api.add_resource(ActivitiesById, '/activites')
+api.add_resource(ActivitiesById, '/activities/<int:id>')
 
+
+class Signups(Resource):
+    def post(self):
+        data = request.get_json()
+        try:
+            signup = Signup(
+                time=data["time"],
+                camper_id=data["camper_id"],
+                activity_id=data["activity_id"]
+            )
+            db.session.add(signup)
+            db.session.commit()
+        except Exception as e:
+            response_dict = {
+                "errors": [e.__str__()]
+            }
+            return make_response(
+                response_dict,
+                422
+            )
+        response = make_response(
+            signup.activity.to_dict(),
+            201
+        )
+        return response
+
+
+api.add_resource(Signups, '/signups')
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

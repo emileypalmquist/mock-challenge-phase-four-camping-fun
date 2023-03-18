@@ -301,6 +301,8 @@ along with the appropriate HTTP status code:
 - [Flask-CORS][flask-cors]
 - [flask.json.jsonify Example Code - Full Stack Python](https://www.fullstackpython.com/flask-json-jsonify-examples.html)
 - [SQLAlchemy-serializer - PyPI](https://pypi.org/project/SQLAlchemy-serializer/)
+- [Many-to-Many Assocation](https://www.youtube.com/watch?v=IlkVu_LWGys)
+- [Deleting Related Objects](https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_deleting_related_objects.htm)
 
-[cors mdn]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[flask-cors]: https://flask-cors.readthedocs.io/en/latest/
+  [cors mdn]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+  [flask-cors]: https://flask-cors.readthedocs.io/en/latest/
